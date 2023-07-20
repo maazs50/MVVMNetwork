@@ -33,6 +33,9 @@ class NewsListFragment : Fragment(), NewsListAdapter.OnArticleClickedListener {
         viewModel?.getNewsList()
         newsAdapter = NewsListAdapter(this)
         viewModel?.newsList?.observe(viewLifecycleOwner,{
+            _binding?.rvNews?.visibility = View.VISIBLE
+            _binding?.progressBar?.visibility = View.GONE
+            _binding?.tvMsg?.visibility = View.VISIBLE
             newsAdapter.submitList(it)
         })
         _binding?.rvNews?.layoutManager = LinearLayoutManager(context)
