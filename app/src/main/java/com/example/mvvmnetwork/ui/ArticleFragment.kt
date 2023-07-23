@@ -8,22 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
 import android.widget.Toast
+import androidx.navigation.fragment.navArgs
 import com.example.mvvmnetwork.databinding.FragmentArticleBinding
 
 
 class ArticleFragment : Fragment() {
     lateinit var _binding: FragmentArticleBinding
     var url: String? = null
+    val args: ArticleFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentArticleBinding.inflate(inflater,container,false)
+        //Another way to fetch data from bundle
         url = arguments?.getString("article_url")
-        Toast.makeText(this.requireContext(),url!!+"",Toast.LENGTH_SHORT).show()
         _binding.webView.apply {
             webViewClient = WebViewClient()
-            loadUrl(arguments?.getString("article_url")!!)
+            loadUrl(args.articleUrl!!)
         }
         return _binding.root
     }

@@ -19,7 +19,7 @@ class NewsClientTest {
     @Test
     fun `GET search-news`(){
         runBlocking {
-            val news = newsClient.newApi.searchForNews("rahul").execute()
+            val news = newsClient.newApi.searchForNews("rahul")
             assertNotNull(news.body()?.articles)
         }
     }

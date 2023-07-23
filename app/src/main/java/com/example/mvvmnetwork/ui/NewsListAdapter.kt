@@ -10,7 +10,7 @@ import com.example.mvvmnetwork.databinding.ListItemBinding
 import com.example.mvvmnetwork.extenstions.loadImage
 import com.mvvmnews.api.models.Article
 
-class NewsListAdapter(val listener: OnArticleClickedListener) : ListAdapter<Article,NewsListAdapter.NewsViewHolder>
+class NewsListAdapter() : ListAdapter<Article,NewsListAdapter.NewsViewHolder>
     (NewsDiffUtilCallback()) {
 
     inner class NewsViewHolder(itemview: View) : RecyclerView.ViewHolder(itemview)
@@ -31,9 +31,11 @@ class NewsListAdapter(val listener: OnArticleClickedListener) : ListAdapter<Arti
             tvTitle.text = article.title
             tvDescription.text = article.description
             tvPublishedAt.text = article.publishedAt
-            ivArticleImage.loadImage(article.urlToImage!!)
+            ivArticleImage.loadImage(article.urlToImage)
             root.setOnClickListener {
-                listener.onClick(article.url)
+                onItemClickListener?.let {
+                    it(article)
+                }
             }
         }
 
@@ -51,8 +53,9 @@ class NewsListAdapter(val listener: OnArticleClickedListener) : ListAdapter<Arti
 
     }
 
+    private var onItemClickListener: ((Article)->Unit)? = null
 
-    interface OnArticleClickedListener{
-        fun onClick(url: String)
+    fun setOnItemClickListener(listener: (Article)->Unit){
+        onItemClickListener = listener
     }
 }

@@ -1,5 +1,6 @@
 package com.mvvmnews.api.services
 
+import com.mvvmnews.api.Constants
 import com.mvvmnews.api.models.ApiResponse
 import retrofit2.Call
 import retrofit2.Response
@@ -14,7 +15,7 @@ interface NewsApi {
         @Query("page")
         pageNumber: Int = 1,
         @Query("apiKey")
-        apiKey: String = "6953a7421bb749c589e687746c85eee8"
+        apiKey: String = Constants.API_KEY
     ) : Response<ApiResponse>
 
     @GET("v2/everything")
@@ -24,6 +25,6 @@ interface NewsApi {
         @Query("page")
         pageNumber: Int = 1,
         @Query("apiKey")
-        apiKey: String = "6953a7421bb749c589e687746c85eee8"
+        apiKey: String = Constants.API_KEY
     ): Response<ApiResponse>
 }
