@@ -44,7 +44,7 @@ class NewsListFragment : Fragment() {
             when(response){
                 is Resource.Success->{
                     hideProgressBar()
-                    newsAdapter.submitList(response.data?.articles)
+                    newsAdapter.addHeaderAndSubmitList(response.data?.articles)
                 }
                 is Resource.Error->{
                     hideProgressBarError()
